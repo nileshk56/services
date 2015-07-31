@@ -19,13 +19,19 @@ user_proxy.prototype.getUserName = function(){
 user_proxy.prototype.get_users = function(callback) {
 	client.hgetall('frameworks', function(err, data) {
 		if(data) {
-			return callback(data);	    	
+			callback(data);	    	
 		} else {
 			u.get_users(function(data){
 				client.hmset('get_users', data);
-				return callback(data);	
+				callback(data);	
 			});		
 		}
+	});
+}
+
+user_proxy.prototype.get_users_reset_cache = function(callback) {
+	u.get_users(function(data){
+		client.hmset('get_users', data);
 	});
 }
 

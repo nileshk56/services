@@ -1,4 +1,9 @@
+var redis = require('redis');
+var client = redis.createClient();
 
+client.on('connect', function() {
+    console.log('connected');
+});
 
 var user_service = require("../services/user_service");
 var u = new user_service();
@@ -21,6 +26,12 @@ user_proxy.prototype.get_users = function(callback) {
 				return callback(data);	
 			});		
 		}
+	});
+}
+
+user_proxy.prototype.get_users_reset_cache = function(callback) {
+	u.get_users(function(data){
+		client.hmset('get_users', data);
 	});
 }
 

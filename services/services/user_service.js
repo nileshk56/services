@@ -14,7 +14,7 @@ user_service.prototype.getUserName = function(userId){
 
 user_service.prototype.get_users = function(callback){
 	User.find(function(err, user){
-		return callback(user);		
+		callback(user);		
 	});
 };
 

@@ -12,15 +12,10 @@ user_service.prototype.getUserName = function(userId){
 	return this.first_name + " " + this.last_name;
 };
 
-user_service.prototype.get_users = function(){
-	var data;
+user_service.prototype.get_users = function(callback){
 	User.find(function(err, user){
-		console.log("HERE");
-		console.log(user);
-		data = user;
-		
+		return callback(user);		
 	});
-	return data;
 };
 
 module.exports = user_service;
