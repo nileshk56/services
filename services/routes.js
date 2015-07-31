@@ -1,8 +1,6 @@
 
 module.exports = function(app) {
-
 	var users = require('./controllers/user_controller');	
-	console.log(users);
 	app.get('/', users.home);
 
 };
